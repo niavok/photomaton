@@ -1,7 +1,5 @@
 <?php
-$SAVE_DIR='/home/fred/photomaton/';
-$BACKUP_DIR='/home/fred/store/photomaton/';
-
+require_once('config.php');
 $captureOutput =  exec("cd $SAVE_DIR && gphoto2 --capture-image-and-download", $output);
 
 $capturedFile = NULL;
@@ -23,14 +21,6 @@ if($capturedFile != NULL) {
 	exit;
 }
 
-$fp = fopen($SAVE_DIR.$capturedFile, 'rb');
-
-// send the right headers
-header("Content-Type: image/jpeg");
-header("Content-Length: " . filesize($SAVE_DIR.$capturedFile));
-header('Content-Disposition: attachment; filename="'.$capturedFile.'"');
-// dump the picture and stop the script
-fpassthru($fp);
-exit;
+display($SAVE_DIR.$capturedFile, $capturedFile);
 
 ?>
