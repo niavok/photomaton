@@ -1,0 +1,11 @@
+sudo chmod -x /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+
+sudo adduser www-data plugdev
+
+sudo service apache2 restart
+
+mkdir -p /home/fred/photomaton/
+chmod 777 /home/fred/photomaton
+
+mkdir -p /home/fred/store/photomaton/
+chmod 777 /home/fred/store/photomaton/
