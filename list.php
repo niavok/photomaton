@@ -8,7 +8,10 @@ foreach (glob("$SAVE_DIR/*") as $path) { // lists all files in folder called "te
 
 header("Content-Type:text/plain");
 foreach ($docs as $path => $timestamp) {
-    print basename($path)."\n";
+	if(pathinfo($path, PATHINFO_EXTENSION) == "JPG")
+	{
+		print basename($path)."\n";
+	}
 }
 
 ?>
