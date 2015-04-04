@@ -10,10 +10,15 @@ chmod 777 /home/fred/photomaton
 mkdir -p /home/fred/store/photomaton/
 chmod 777 /home/fred/store/photomaton/
 
+Printer configuration:
 
-lpr -o page-top=0 -o page-left=0 -o page-right=0
- -o page-bottom=0 -o page-border=none -o position=top -o media=Photo10x15 -o fit-to-page -o scaling=100 DSC_9114.JPG
+hp-gui
 
-
-convert DSC_9114.JPG DSC_9114.pdf
-lpr DSC_9114.pdf
+Portrait
+Borderless Photo 10x15cm
+Color
+Photo paper
+Higth Resolution Photo
+Fit to page
+centered
+Saturation 100%
