@@ -48,7 +48,7 @@ public class CaptureActivity extends ActionBarActivity {
                         } else {
                             capture();
                         }
-                        mCountdownTextView.setText(""+mDelay);
+                        mCountdownTextView.setText(""+(mDelay+1));
                         break;
                     case WHAT_CAPTURE_DONE:
                         String disp = (String) msg.obj;
@@ -66,9 +66,12 @@ public class CaptureActivity extends ActionBarActivity {
             @Override
             public void run() {
                 try {
-                    HttpResponse response = AndroidHttpClient.newInstance("Android").execute(new HttpHead("http://192.168.1.98/capture.php"));
+                    AndroidHttpClient httpClient = AndroidHttpClient.newInstance("Android");
+                    HttpResponse response = httpClient.execute(new HttpHead("http://192.168.1.98/capture.php"));
                     Header contentDisposition = response.getLastHeader("Content-Disposition");
                     mHandler.obtainMessage(WHAT_CAPTURE_DONE, response.getStatusLine().getStatusCode(), 0, contentDisposition.getValue()).sendToTarget();
+
+                    httpClient.close();
 
 
                 } catch (Exception e) {
