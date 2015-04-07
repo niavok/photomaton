@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.niavok.photomation" >
+    package="com.niavok.photomaton" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,13 +10,13 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".PreviewActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:theme="@style/FullscreenTheme" >
+            android:screenOrientation="landscape"
+            android:name="com.niavok.photomaton.PreviewActivity"
+            android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".MainChooseActivity"
+            android:screenOrientation="landscape"
+            android:name="com.niavok.photomaton.MainChooseActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,11 +25,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".GuestbookInstructionsActivity"
+            android:screenOrientation="landscape"
+            android:name="com.niavok.photomaton.GuestbookInstructionsActivity"
             android:label="@string/title_activity_guestbook_instructions" >
         </activity>
         <activity
-            android:name=".CaptureActivity"
+            android:screenOrientation="landscape"
+            android:name="com.niavok.photomaton.CaptureActivity"
             android:label="@string/title_activity_capture" >
         </activity>
     </application>

@@ -1,9 +1,10 @@
-package com.niavok.photomation;
+package com.niavok.photomaton;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.net.http.AndroidHttpClient;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,10 +16,8 @@ import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpHead;
 
-import java.io.IOException;
 
-
-public class CaptureActivity extends ActionBarActivity {
+public class CaptureActivity extends Activity {
     public final static String EXTRA_DELAY = "delay";
 
     public final static int WHAT_NEW_SECOND = 0;
@@ -53,6 +52,16 @@ public class CaptureActivity extends ActionBarActivity {
                     case WHAT_CAPTURE_DONE:
                         String disp = (String) msg.obj;
                         Toast.makeText(CaptureActivity.this, "Code: "+msg.arg1+" disp: "+disp, Toast.LENGTH_LONG).show();
+
+                        String filename = disp.split("\"")[1];
+                        Log.e("PLOP", "disp="+disp);
+                        Log.e("PLOP", "filename="+filename);
+                        Intent intent = new Intent(CaptureActivity.this, PreviewActivity.class);
+                        intent.putExtra(PreviewActivity.EXTRA_PICTURE_ID, filename);
+                        startActivity(intent);
+
+
+
                 }
             }
         };
@@ -69,13 +78,13 @@ public class CaptureActivity extends ActionBarActivity {
                     AndroidHttpClient httpClient = AndroidHttpClient.newInstance("Android");
                     HttpResponse response = httpClient.execute(new HttpHead("http://192.168.1.98/capture.php"));
                     Header contentDisposition = response.getLastHeader("Content-Disposition");
+                    httpClient.close();
                     mHandler.obtainMessage(WHAT_CAPTURE_DONE, response.getStatusLine().getStatusCode(), 0, contentDisposition.getValue()).sendToTarget();
 
-                    httpClient.close();
 
 
                 } catch (Exception e) {
-                    Log.e("PLOP", e.getMessage());
+                    Log.e("PLOP", "Fail to capture" + e.getMessage());
                 }
             }
         });

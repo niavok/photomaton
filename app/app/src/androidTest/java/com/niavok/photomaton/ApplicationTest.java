@@ -1,4 +1,4 @@
-package com.niavok.photomation;
+package com.niavok.photomaton;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
