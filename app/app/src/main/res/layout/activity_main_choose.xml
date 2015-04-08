@@ -9,7 +9,7 @@
     tools:context="com.niavok.photomaton.MainChooseActivity">
 
 
-    <TextView android:id="@+id/mariageTitle" android:text="" android:layout_width="match_parent"
+    <TextView android:id="@+id/mariageTitle" android:text="Mariage de Sabine et Christophe" android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center|center_horizontal"
         android:gravity="center_horizontal"
@@ -58,7 +58,7 @@
                 android:layout_gravity="center|center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="LIvre d&apos;or"
+                android:text="Livre d&apos;or"
                 android:id="@+id/guestbookButton"
                 android:layout_below="@+id/sandboxButton"
                 android:layout_alignParentLeft="true"
@@ -97,7 +97,6 @@
                 android:text="Sandbox"
                 android:textSize="60dp"
                 android:id="@+id/sandboxButton"
-                android:layout_below="@+id/textView"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="20dp"/>
@@ -105,6 +104,7 @@
             <TextView android:text="Prendre des photos souvenirs qui vous seront envoyées après le mariage." android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|center_horizontal"
+                android:gravity="center_horizontal"
                 android:textSize="50dp"
                 android:layout_margin="20dp"
                  />
