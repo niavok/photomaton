@@ -1,5 +1,7 @@
 <resources>
 
     <color name="black_overlay">#66000000</color>
+    <color name="silver">#BBBBBB</color>
+    <color name="turquoise">#9EF2FF</color>
 
 </resources>

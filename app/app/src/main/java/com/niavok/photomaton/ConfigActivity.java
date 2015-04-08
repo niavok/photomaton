@@ -49,6 +49,13 @@ public class ConfigActivity extends ActionBarActivity {
         return "http://"+ip+"/display.php?picture="+pictureId;
     }
 
+    public static String getPrintUrl(Context context, String pictureId)
+    {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+        String ip = settings.getString(CONFIG_IP, "127.0.0.1");
+        return "http://"+ip+"/print.php?picture="+pictureId;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

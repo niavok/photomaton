@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.http.AndroidHttpClient;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,6 +18,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import org.apache.http.Header;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpHead;
 
 import java.net.URL;
 
@@ -29,6 +34,9 @@ import java.net.URL;
 public class PreviewActivity extends Activity {
 
     public static final String EXTRA_PICTURE_ID = "picture_id";
+
+    public final static int WHAT_LOAD_DONE = 0;
+    public final static int WHAT_PRINT_DONE = 1;
 
     private Handler mLoadHandler;
     private ImageView mImageView;
@@ -68,24 +76,31 @@ public class PreviewActivity extends Activity {
             }
         });
 
-        Button printButton = (Button) findViewById(R.id.printButton);
+        final Button printButton = (Button) findViewById(R.id.printButton);
         printButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 print();
-                Intent intent = new Intent(PreviewActivity.this, MainChooseActivity.class);
-                intent.putExtra(MainChooseActivity.EXTRA_PRINTING, true);
-                startActivity(intent);
+                printButton.setEnabled(false);
             }
         });
 
         mLoadHandler = new Handler() {
             @Override
             public void handleMessage(Message msg){
-                mImageView.setImageBitmap(mBitmap);
-                mControls.setVisibility(View.VISIBLE);
-                mLoadingView.setVisibility(View.GONE);
-                mTopView.setBackgroundColor(Color.BLACK);
+                switch (msg.what) {
+                    case WHAT_LOAD_DONE:
+                        mImageView.setImageBitmap(mBitmap);
+                        mControls.setVisibility(View.VISIBLE);
+                        mLoadingView.setVisibility(View.GONE);
+                        mTopView.setBackgroundColor(Color.BLACK);
+                        break;
+                    case WHAT_PRINT_DONE:
+                        Intent intent = new Intent(PreviewActivity.this, MainChooseActivity.class);
+                        intent.putExtra(MainChooseActivity.EXTRA_PRINTING, true);
+                        startActivity(intent);
+                }
+
             }
         };
 
@@ -94,7 +109,23 @@ public class PreviewActivity extends Activity {
     }
 
     private void print() {
-        Toast.makeText(this, "TODO: print", Toast.LENGTH_SHORT).show();
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try {
+                    AndroidHttpClient httpClient = AndroidHttpClient.newInstance("Android");
+                    String printUrl = ConfigActivity.getPrintUrl(PreviewActivity.this, mPictureId);
+                    Log.d("PLOP", "Print URL=" + printUrl);
+                    HttpResponse response = httpClient.execute(new HttpHead(printUrl));
+                    Log.d("PLOP", "Print response=" + response.getStatusLine().getStatusCode());
+                    httpClient.close();
+                    mLoadHandler.sendEmptyMessage(WHAT_PRINT_DONE);
+                } catch (Exception e) {
+                    Log.e("PLOP", "Fail to print: " + e);
+                }
+            }
+        });
+        thread.start();
     }
 
     private void loadImage() {
@@ -106,7 +137,7 @@ public class PreviewActivity extends Activity {
                     BitmapFactory.Options o2 = new BitmapFactory.Options();
                     o2.inSampleSize=4;
                     mBitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream(), null, o2);
-                    mLoadHandler.sendEmptyMessage(0);
+                    mLoadHandler.sendEmptyMessage(WHAT_LOAD_DONE);
 
 
                 } catch (Exception e) {
