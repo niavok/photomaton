@@ -7,48 +7,91 @@
     android:background="@color/turquoise"
     android:keepScreenOn="true"
     tools:context="com.niavok.photomaton.GuestbookInstructionsActivity">
+    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
+        >
+    <LinearLayout  style="?metaButtonBarStyle"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_gravity="center|center_horizontal"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent"
+        >
 
-    <TextView android:text="Explain how guestbook works" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView2" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1 seconde"
-        android:id="@+id/oneSecondButton"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+            <TextView android:text="1 - Prenez la tablette avec vous.\n\n2 - Placez vous dans le cone tracé au sol pour être dans le cadre.\n\n3 - Choissez le bouton du délai de votre choix pour prendre une photo. Vous pourrez la visualiser et faire d'autres essais avant d'imprimer."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:layout_margin="20dp"
+                android:id="@+id/textView2" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="5 secondes"
-        android:id="@+id/fiveSecondsButton"
-        android:layout_below="@+id/oneSecondButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="28dp" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Abandon"
+                android:id="@+id/abandonButton"
+                android:layout_below="@+id/tenSecondsButton"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textSize="30dp"
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="10 secondes"
-        android:id="@+id/tenSecondsButton"
-        android:layout_below="@+id/fiveSecondsButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="28dp" />
+                android:layout_marginTop="28dp" />
+        </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Abandon"
-        android:id="@+id/abandonButton"
-        android:layout_below="@+id/tenSecondsButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="28dp" />
+
+
+
+
+           <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+
+            android:background="@color/silver" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_horizontal"
+                android:text="1 seconde"
+                android:textSize="60dp"
+                android:id="@+id/oneSecondButton"
+                 />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_horizontal"
+                android:text="5 secondes"
+                android:textSize="60dp"
+                android:id="@+id/fiveSecondsButton"
+                android:layout_marginTop="60dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_horizontal"
+                android:text="10 secondes"
+                android:textSize="60dp"
+                android:id="@+id/tenSecondsButton"
+                android:layout_marginTop="60dp" />
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    </FrameLayout>
 
 </RelativeLayout>

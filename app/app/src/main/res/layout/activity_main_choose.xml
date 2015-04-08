@@ -60,6 +60,7 @@
                 android:layout_gravity="center|center_horizontal"
                 android:gravity="center_horizontal"
                 android:textSize="50dp"
+                android:layout_margin="20dp"
                  />
 
 
@@ -94,6 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|center_horizontal"
                 android:textSize="50dp"
+                android:layout_margin="20dp"
                  />
 
 
