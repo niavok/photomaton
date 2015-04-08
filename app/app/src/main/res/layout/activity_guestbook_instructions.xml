@@ -19,7 +19,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
+            android:layout_gravity="center|center_horizontal"
             android:orientation="vertical">
 
             <TextView android:text="1 - Prenez la tablette avec vous.\n\n2 - Placez vous dans le cone tracé au sol pour être dans le cadre.\n\n3 - Choissez le bouton du délai de votre choix pour prendre une photo. Vous pourrez la visualiser et faire d'autres essais avant d'imprimer."
@@ -56,6 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_gravity="center|center_horizontal"
             android:orientation="vertical">
 
             <Button

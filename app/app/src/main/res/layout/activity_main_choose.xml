@@ -8,6 +8,17 @@
     android:keepScreenOn="true"
     tools:context="com.niavok.photomaton.MainChooseActivity">
 
+
+    <TextView android:id="@+id/mariageTitle" android:text="" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|center_horizontal"
+        android:gravity="center_horizontal"
+        android:layout_margin="20dp"
+        android:textSize="30dp"
+        />
+
+
+
     <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
         >
         <LinearLayout android:id="@+id/plugTabletLayout" style="?metaButtonBarStyle"

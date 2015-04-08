@@ -11,12 +11,14 @@ import android.os.BatteryManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 public class MainChooseActivity extends Activity {
 
     public static final String EXTRA_PRINTING = "printing";
     private View mPlugTabletLayout;
+    private BroadcastReceiver mBroadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,13 @@ public class MainChooseActivity extends Activity {
         setContentView(R.layout.activity_main_choose);
 
         mPlugTabletLayout = findViewById(R.id.plugTabletLayout);
+
+        TextView mariageTitle = (TextView) findViewById(R.id.mariageTitle);
+        if(Math.random() <  0.5) {
+            mariageTitle.setText("Mariage de Sabine & Christophe");
+        } else {
+            mariageTitle.setText("Mariage de Christophe & Sabine");
+        }
 
         Button guestbookButton = (Button) findViewById(R.id.guestbookButton);
         guestbookButton.setOnClickListener(new View.OnClickListener() {
@@ -48,18 +57,26 @@ public class MainChooseActivity extends Activity {
         }
 
         IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-        Intent batteryStatus = registerReceiver(new BroadcastReceiver() {
+
+        mBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 onBatteryChanged(intent);
             }
-        }, ifilter);
+        };
+
+        Intent batteryStatus = registerReceiver(mBroadcastReceiver, ifilter);
         if(batteryStatus != null) {
             onBatteryChanged(batteryStatus);
         }
 
     }
 
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(mBroadcastReceiver);
+        super.onDestroy();
+    }
 
     private void onBatteryChanged(Intent batteryStatus)
     {
