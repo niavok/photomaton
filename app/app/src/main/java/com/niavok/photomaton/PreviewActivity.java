@@ -1,17 +1,21 @@
 package com.niavok.photomaton;
 
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.net.URL;
@@ -30,6 +34,10 @@ public class PreviewActivity extends Activity {
     private ImageView mImageView;
     private Bitmap mBitmap;
     private String mPictureId;
+    private View mControls;
+    private View mLoadingView;
+    private View mTopView;
+    private ProgressBar mCaptureProgressBar;
 
 
     @Override
@@ -40,7 +48,16 @@ public class PreviewActivity extends Activity {
 
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
         mImageView = (ImageView) findViewById(R.id.imageView);
+        mControls = findViewById(R.id.fullscreen_content_controls);
+        mLoadingView = findViewById(R.id.loadingView);
+        mTopView = findViewById(R.id.topView);
+        mCaptureProgressBar = (ProgressBar) findViewById(R.id.captureProgressBar);
 
+        // Capture animation
+        ObjectAnimator animation = ObjectAnimator.ofInt(mCaptureProgressBar, "progress", 1000);
+        animation.setDuration(5000);
+        animation.setInterpolator(new LinearInterpolator());
+        animation.start();
 
         Button retryButton = (Button) findViewById(R.id.retryButton);
         retryButton.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +83,9 @@ public class PreviewActivity extends Activity {
             @Override
             public void handleMessage(Message msg){
                 mImageView.setImageBitmap(mBitmap);
-
+                mControls.setVisibility(View.VISIBLE);
+                mLoadingView.setVisibility(View.GONE);
+                mTopView.setBackgroundColor(Color.BLACK);
             }
         };
 
@@ -79,13 +98,11 @@ public class PreviewActivity extends Activity {
     }
 
     private void loadImage() {
-        Toast.makeText(this, "Load Image", Toast.LENGTH_SHORT).show();
-
         Thread thread = new Thread(new Runnable(){
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://192.168.1.98/display.php?picture="+mPictureId);
+                    URL url = new URL(ConfigActivity.getDisplayUrl(PreviewActivity.this, mPictureId));
                     BitmapFactory.Options o2 = new BitmapFactory.Options();
                     o2.inSampleSize=4;
                     mBitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream(), null, o2);
@@ -104,6 +121,7 @@ public class PreviewActivity extends Activity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
     }
+
 
 
 }

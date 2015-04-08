@@ -1,5 +1,6 @@
 package com.niavok.photomaton;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.http.AndroidHttpClient;
@@ -9,6 +10,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.LinearInterpolator;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +30,8 @@ public class CaptureActivity extends Activity {
     private int mDelay;
     private Handler mHandler;
     private TextView mCountdownTextView;
+    private ProgressBar mCaptureProgressBar;
+    private TextView mSmileTextView;
 
 
     @Override
@@ -34,6 +40,9 @@ public class CaptureActivity extends Activity {
         setContentView(R.layout.activity_capture);
 
         mCountdownTextView = (TextView) findViewById(R.id.countdownTextView);
+        mSmileTextView = (TextView) findViewById(R.id.smileTextView);
+
+        mCaptureProgressBar = (ProgressBar) findViewById(R.id.captureProgressBar);
         mDelay = getIntent().getIntExtra(EXTRA_DELAY,0);
 
         mHandler = new Handler() {
@@ -44,14 +53,17 @@ public class CaptureActivity extends Activity {
                         if(mDelay > 0) {
                             mDelay--;
                             mHandler.sendEmptyMessageDelayed(WHAT_NEW_SECOND, 1000);
+                            mCountdownTextView.setText(""+(mDelay+1));
+                            mCountdownTextView.setVisibility(View.VISIBLE);
+                            mCaptureProgressBar.setVisibility(View.GONE);
+                            mSmileTextView.setVisibility(View.GONE);
                         } else {
                             capture();
                         }
-                        mCountdownTextView.setText(""+(mDelay+1));
+
                         break;
                     case WHAT_CAPTURE_DONE:
                         String disp = (String) msg.obj;
-                        Toast.makeText(CaptureActivity.this, "Code: "+msg.arg1+" disp: "+disp, Toast.LENGTH_LONG).show();
 
                         String filename = disp.split("\"")[1];
                         Log.e("PLOP", "disp="+disp);
@@ -69,14 +81,21 @@ public class CaptureActivity extends Activity {
     }
 
     private void capture() {
-        Toast.makeText(this, "Capture", Toast.LENGTH_SHORT).show();
+        mCountdownTextView.setVisibility(View.GONE);
+        mCaptureProgressBar.setVisibility(View.VISIBLE);
+        mSmileTextView.setVisibility(View.VISIBLE);
+        // Capture animation
+        ObjectAnimator animation = ObjectAnimator.ofInt(mCaptureProgressBar, "progress", 1000);
+        animation.setDuration(3100);
+        animation.setInterpolator(new LinearInterpolator());
+        animation.start();
 
         Thread thread = new Thread(new Runnable(){
             @Override
             public void run() {
                 try {
                     AndroidHttpClient httpClient = AndroidHttpClient.newInstance("Android");
-                    HttpResponse response = httpClient.execute(new HttpHead("http://192.168.1.98/capture.php"));
+                    HttpResponse response = httpClient.execute(new HttpHead(ConfigActivity.getCaptureUrl(CaptureActivity.this)));
                     Header contentDisposition = response.getLastHeader("Content-Disposition");
                     httpClient.close();
                     mHandler.obtainMessage(WHAT_CAPTURE_DONE, response.getStatusLine().getStatusCode(), 0, contentDisposition.getValue()).sendToTarget();

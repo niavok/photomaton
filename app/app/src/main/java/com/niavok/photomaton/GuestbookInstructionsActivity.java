@@ -21,7 +21,7 @@ public class GuestbookInstructionsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(GuestbookInstructionsActivity.this, CaptureActivity.class);
-                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                //intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 intent.putExtra(CaptureActivity.EXTRA_DELAY, 1);
                 startActivity(intent);
             }
@@ -32,7 +32,7 @@ public class GuestbookInstructionsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(GuestbookInstructionsActivity.this, CaptureActivity.class);
-                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                //intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 intent.putExtra(CaptureActivity.EXTRA_DELAY, 5);
                 startActivity(intent);
             }
@@ -44,7 +44,7 @@ public class GuestbookInstructionsActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(GuestbookInstructionsActivity.this, CaptureActivity.class);
                 intent.putExtra(CaptureActivity.EXTRA_DELAY, 10);
-                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                //intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
             }
         });
