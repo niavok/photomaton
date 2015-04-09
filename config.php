@@ -1,6 +1,6 @@
 <?php
 $SAVE_DIR='/home/fred/photomaton/';
-$BACKUP_DIR='/home/fred/store/photomaton/';
+$BACKUP_DIR='/media/store/photomaton/';
 
 
 

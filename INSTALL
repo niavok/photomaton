@@ -1,4 +1,7 @@
+sudo apt-get install apache2 php5 hplip-gui gphoto2
+
 sudo chmod -x /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+killall gvfs-gphoto2-volume-monitor
 
 sudo adduser www-data plugdev
 
