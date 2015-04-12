@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.http.AndroidHttpClient;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,11 +18,13 @@ import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpHead;
+import org.w3c.dom.Text;
 
 import java.net.URL;
 
@@ -34,9 +37,11 @@ import java.net.URL;
 public class PreviewActivity extends Activity {
 
     public static final String EXTRA_PICTURE_ID = "picture_id";
+    public final static String EXTRA_ALLOW_PRINT = "allow_print";
 
     public final static int WHAT_LOAD_DONE = 0;
     public final static int WHAT_PRINT_DONE = 1;
+    public final static int WHAT_DELETE_DONE = 2;
 
     private Handler mLoadHandler;
     private ImageView mImageView;
@@ -46,6 +51,7 @@ public class PreviewActivity extends Activity {
     private View mLoadingView;
     private View mTopView;
     private ProgressBar mCaptureProgressBar;
+    private boolean mAllowPrint;
 
 
     @Override
@@ -67,16 +73,26 @@ public class PreviewActivity extends Activity {
         animation.setInterpolator(new LinearInterpolator());
         animation.start();
 
-        Button retryButton = (Button) findViewById(R.id.retryButton);
+
+        Typeface fontLemon = Typeface.createFromAsset(getAssets(), "DK Lemon Yellow Sun.otf");
+
+
+        TextView loadingTextView = (TextView) findViewById(R.id.loadingTextView);
+        loadingTextView.setTypeface(fontLemon);
+
+        final Button retryButton = (Button) findViewById(R.id.retryButton);
+        retryButton.setTypeface(fontLemon);
         retryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PreviewActivity.this, GuestbookInstructionsActivity.class);
-                startActivity(intent);
+                delete();
+                retryButton.setEnabled(false);
+
             }
         });
 
         final Button printButton = (Button) findViewById(R.id.printButton);
+        printButton.setTypeface(fontLemon);
         printButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +100,27 @@ public class PreviewActivity extends Activity {
                 printButton.setEnabled(false);
             }
         });
+
+        final Button saveButton = (Button) findViewById(R.id.saveButton);
+        saveButton.setTypeface(fontLemon);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PreviewActivity.this, MainChooseActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        mAllowPrint = getIntent().getBooleanExtra(EXTRA_ALLOW_PRINT, false);
+
+        if(mAllowPrint) {
+            saveButton.setVisibility(View.GONE);
+            printButton.setVisibility(View.VISIBLE);
+        } else {
+            saveButton.setVisibility(View.VISIBLE);
+            printButton.setVisibility(View.GONE);
+        }
 
         mLoadHandler = new Handler() {
             @Override
@@ -93,12 +130,24 @@ public class PreviewActivity extends Activity {
                         mImageView.setImageBitmap(mBitmap);
                         mControls.setVisibility(View.VISIBLE);
                         mLoadingView.setVisibility(View.GONE);
-                        mTopView.setBackgroundColor(Color.BLACK);
+                        //mTopView.setBackgroundColor(Color.BLACK);
                         break;
-                    case WHAT_PRINT_DONE:
+                    case WHAT_PRINT_DONE: {
                         Intent intent = new Intent(PreviewActivity.this, MainChooseActivity.class);
                         intent.putExtra(MainChooseActivity.EXTRA_PRINTING, true);
                         startActivity(intent);
+                    }
+                    break;
+                    case WHAT_DELETE_DONE: {
+                        if(mAllowPrint) {
+                            Intent intent = new Intent(PreviewActivity.this, GuestbookInstructionsActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(PreviewActivity.this, PhotoboothInstructionsActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                    break;
                 }
 
             }
@@ -120,6 +169,26 @@ public class PreviewActivity extends Activity {
                     Log.d("PLOP", "Print response=" + response.getStatusLine().getStatusCode());
                     httpClient.close();
                     mLoadHandler.sendEmptyMessage(WHAT_PRINT_DONE);
+                } catch (Exception e) {
+                    Log.e("PLOP", "Fail to print: " + e);
+                }
+            }
+        });
+        thread.start();
+    }
+
+    private void delete() {
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try {
+                    AndroidHttpClient httpClient = AndroidHttpClient.newInstance("Android");
+                    String printUrl = ConfigActivity.getDeleteUrl(PreviewActivity.this, mPictureId);
+                    Log.d("PLOP", "Delete URL=" + printUrl);
+                    HttpResponse response = httpClient.execute(new HttpHead(printUrl));
+                    Log.d("PLOP", "Delete response=" + response.getStatusLine().getStatusCode());
+                    httpClient.close();
+                    mLoadHandler.sendEmptyMessage(WHAT_DELETE_DONE);
                 } catch (Exception e) {
                     Log.e("PLOP", "Fail to print: " + e);
                 }

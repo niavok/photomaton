@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Typeface;
 import android.net.http.AndroidHttpClient;
 import android.os.Handler;
 import android.os.Message;
@@ -26,6 +27,7 @@ import org.apache.http.client.methods.HttpHead;
 
 public class CaptureActivity extends Activity {
     public final static String EXTRA_DELAY = "delay";
+    public final static String EXTRA_ALLOW_PRINT = "allow_print";
 
     public final static int WHAT_NEW_SECOND = 0;
     public final static int WHAT_CAPTURE_DONE = 1;
@@ -35,6 +37,7 @@ public class CaptureActivity extends Activity {
     private TextView mCountdownTextView;
     private ProgressBar mCaptureProgressBar;
     private TextView mSmileTextView;
+    private boolean mAllowPrint;
 
 
     @Override
@@ -42,11 +45,21 @@ public class CaptureActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capture);
 
+        Typeface fontLemon = Typeface.createFromAsset(getAssets(), "DK Lemon Yellow Sun.otf");
+
+
+
+
         mCountdownTextView = (TextView) findViewById(R.id.countdownTextView);
         mSmileTextView = (TextView) findViewById(R.id.smileTextView);
 
+        mCountdownTextView.setTypeface(fontLemon);
+        mSmileTextView.setTypeface(fontLemon);
+
+
         mCaptureProgressBar = (ProgressBar) findViewById(R.id.captureProgressBar);
         mDelay = getIntent().getIntExtra(EXTRA_DELAY,0);
+        mAllowPrint = getIntent().getBooleanExtra(EXTRA_ALLOW_PRINT, false);
 
         mHandler = new Handler() {
             @Override
@@ -73,6 +86,7 @@ public class CaptureActivity extends Activity {
                         Log.e("PLOP", "filename="+filename);
                         Intent intent = new Intent(CaptureActivity.this, PreviewActivity.class);
                         intent.putExtra(PreviewActivity.EXTRA_PICTURE_ID, filename);
+                        intent.putExtra(PreviewActivity.EXTRA_ALLOW_PRINT, mAllowPrint);
                         startActivity(intent);
 
 

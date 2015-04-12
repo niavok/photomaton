@@ -1,7 +1,11 @@
 <resources>
 
     <color name="black_overlay">#66000000</color>
-    <color name="silver">#BBBBBB</color>
+    <color name="silver">#555555</color>
     <color name="turquoise">#9EF2FF</color>
+    <color name="textFont">#FFFFFF</color>
+    <color name="textDark">#222222</color>
+    <color name="textAlert">#A666FF</color>
+    <color name="buttonBackground">#AAFFFFFF</color>
 
 </resources>

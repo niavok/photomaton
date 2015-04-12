@@ -4,17 +4,18 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="@color/turquoise"
+    android:background="@drawable/ring"
     android:keepScreenOn="true"
     tools:context="com.niavok.photomaton.MainChooseActivity">
 
 
-    <TextView android:id="@+id/mariageTitle" android:text="Mariage de Sabine et Christophe" android:layout_width="match_parent"
+    <TextView android:id="@+id/mariageTitle" android:text="Mariage\nSabine et Christophe" android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center|center_horizontal"
         android:gravity="center_horizontal"
         android:layout_margin="20dp"
-        android:textSize="30dp"
+        android:textSize="50dp"
+        android:typeface="serif"
         />
 
 
@@ -31,11 +32,12 @@
 
 
             <TextView  android:text="Rebranchez la tablette dès que vous avez fini de l'utiliser. Merci" android:layout_width="match_parent"
+                android:id="@+id/plugTabletTextView"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|center_horizontal"
                 android:gravity="center_horizontal"
-                android:textSize="30dp"
-                android:textColor="@android:color/holo_red_dark"
+                android:textSize="40dp"
+                android:textColor="@color/textAlert"
                 />
 
 
@@ -45,6 +47,7 @@
         android:layout_width="match_parent" android:layout_height="wrap_content"
         android:layout_gravity="center|center_horizontal"
         android:orientation="horizontal"
+        android:layout_marginTop="80dp"
         tools:ignore="UselessParent">
 
         <LinearLayout
@@ -60,13 +63,17 @@
                 android:layout_height="wrap_content"
                 android:text="Livre d&apos;or"
                 android:id="@+id/guestbookButton"
-                android:layout_below="@+id/sandboxButton"
+                android:layout_below="@+id/photoBoothButton"
                 android:layout_alignParentLeft="true"
-                android:textSize="60dp"
+                android:textSize="80dp"
+                android:padding="20dp"
+                android:textColor="@color/textDark"
+                android:background="@color/buttonBackground"
                 android:layout_alignParentStart="true"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="40dp"/>
 
             <TextView android:text="Prendre une photo et l'imprimer pour le livre d'or." android:layout_width="match_parent"
+                android:id="@+id/guestbookTextView"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|center_horizontal"
                 android:gravity="center_horizontal"
@@ -94,14 +101,19 @@
                 android:layout_gravity="center|center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sandbox"
-                android:textSize="60dp"
-                android:id="@+id/sandboxButton"
+                android:text="Photobooth"
+                android:textSize="80dp"
+                android:id="@+id/photoBoothButton"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginBottom="20dp"/>
+                android:padding="20dp"
+                android:textColor="@color/textDark"
+                android:layout_marginBottom="40dp"
+                android:background="@color/buttonBackground"
+                />
 
             <TextView android:text="Prendre des photos souvenirs qui vous seront envoyées après le mariage." android:layout_width="match_parent"
+                android:id="@+id/photoBoothTextView"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|center_horizontal"
                 android:gravity="center_horizontal"

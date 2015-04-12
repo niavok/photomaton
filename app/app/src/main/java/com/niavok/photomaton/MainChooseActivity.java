@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Typeface;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.view.View;
@@ -29,16 +30,53 @@ public class MainChooseActivity extends Activity {
 
         TextView mariageTitle = (TextView) findViewById(R.id.mariageTitle);
         if(Math.random() <  0.5) {
-            mariageTitle.setText("Mariage de Sabine & Christophe");
+            mariageTitle.setText("Mariage\nSabine & Christophe");
         } else {
-            mariageTitle.setText("Mariage de Christophe & Sabine");
+            mariageTitle.setText("Mariage\nChristophe & Sabine");
         }
 
+        Typeface fontChopin = Typeface.createFromAsset(getAssets(), "ChopinScript.otf");
+        Typeface fontWizards = Typeface.createFromAsset(getAssets(), "Wizards Magic.ttf");
+        Typeface fontLemon = Typeface.createFromAsset(getAssets(), "DK Lemon Yellow Sun.otf");
+        Typeface fontSugar = Typeface.createFromAsset(getAssets(), "give me some sugar_2.ttf");
+        Typeface fontAustie = Typeface.createFromAsset(getAssets(), "Austie Bost Envelopes.ttf");
+        Typeface fontAustie2 = Typeface.createFromAsset(getAssets(), "Austie Bost Blueberry Muffins.ttf");
+
+        Typeface fontJanda = Typeface.createFromAsset(getAssets(), "JandaQuirkygirl.ttf");
+
+
+        mariageTitle.setTypeface(fontChopin);
+
+
+        Typeface font = null;
+
+
+        TextView plugTabletTextView = (TextView) findViewById(R.id.plugTabletTextView);
+        plugTabletTextView.setTypeface(fontLemon);
+
+        TextView guestbookTextView = (TextView) findViewById(R.id.guestbookTextView);
+        guestbookTextView.setTypeface(fontJanda);
+
+        TextView photoBoothTextView = (TextView) findViewById(R.id.photoBoothTextView);
+        photoBoothTextView.setTypeface(fontJanda);
+
+
         Button guestbookButton = (Button) findViewById(R.id.guestbookButton);
+        guestbookButton.setTypeface(fontLemon);
         guestbookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainChooseActivity.this, GuestbookInstructionsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button photoBoothButton = (Button) findViewById(R.id.photoBoothButton);
+        photoBoothButton.setTypeface(fontLemon);
+        photoBoothButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainChooseActivity.this, PhotoboothInstructionsActivity.class);
                 startActivity(intent);
             }
         });

@@ -1,6 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:background="@color/turquoise"
+    android:background="@drawable/ring"
     android:layout_height="match_parent"  android:id="@+id/topView" tools:context=".MainMenu"
     android:keepScreenOn="true">
 
@@ -8,33 +8,63 @@
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
 
+    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
+        android:layout_marginBottom="120dp"
+        >
     <ImageView
+        android:layout_margin="0dp"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:keepScreenOn="true"
         android:id="@+id/imageView"
         android:gravity="center" />
-
+    </FrameLayout>
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
     <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
         >
 
         <LinearLayout android:id="@+id/fullscreen_content_controls" style="?metaButtonBarStyle"
-            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay" android:orientation="horizontal"
+             android:orientation="horizontal"
             tools:ignore="UselessParent"
             android:visibility="gone">
 
 
             <Button android:id="@+id/retryButton" style="?metaButtonBarButtonStyle"
-                android:layout_width="0dp" android:layout_height="wrap_content"
-                android:layout_weight="1" android:text="Réésayer" />
+                android:layout_width="400dp" android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:padding="10dp"
+                android:textColor="@color/textDark"
+                android:textSize="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:background="@color/buttonBackground"
+                 android:text="Réessayer" />
 
             <Button android:id="@+id/printButton" style="?metaButtonBarButtonStyle"
-                android:layout_width="0dp" android:layout_height="wrap_content"
-                android:layout_weight="1" android:text="Imprimer" />
+                android:layout_width="400dp" android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:padding="10dp"
+                android:textColor="@color/textDark"
+                android:textSize="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:background="@color/buttonBackground"
+                 android:text="Imprimer" />
+
+            <Button android:id="@+id/saveButton" style="?metaButtonBarButtonStyle"
+                android:layout_width="400dp" android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:padding="10dp"
+                android:textColor="@color/textDark"
+                android:textSize="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:background="@color/buttonBackground"
+                android:text="Sauvegarder" />
 
 
         </LinearLayout>
@@ -50,7 +80,7 @@
             <TextView android:id="@+id/loadingTextView" android:text="Chargement" android:layout_width="fill_parent"
                 android:gravity="center"
                 android:layout_height="wrap_content"
-                android:textSize="30dp"
+                android:textSize="50dp"
                 android:visibility="visible"
                 />
             <ProgressBar

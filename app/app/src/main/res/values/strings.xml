@@ -8,6 +8,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_guestbook_instructions">GuestbookInstructions</string>
+    <string name="title_activity_photobooth_instructions">GuestbookInstructions</string>
     <string name="title_activity_capture">CaptureActivity</string>
     <string name="title_activity_config">ConfigActivity</string>
 </resources>

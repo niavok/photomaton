@@ -11,12 +11,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-public class GuestbookInstructionsActivity extends Activity {
+public class PhotoboothInstructionsActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guestbook_instructions);
+        setContentView(R.layout.activity_photobooth_instructions);
 
         Typeface fontLemon = Typeface.createFromAsset(getAssets(), "DK Lemon Yellow Sun.otf");
         Typeface fontJanda = Typeface.createFromAsset(getAssets(), "JandaQuirkygirl.ttf");
@@ -27,10 +27,10 @@ public class GuestbookInstructionsActivity extends Activity {
         oneSecondButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GuestbookInstructionsActivity.this, CaptureActivity.class);
+                Intent intent = new Intent(PhotoboothInstructionsActivity.this, CaptureActivity.class);
                 //intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 intent.putExtra(CaptureActivity.EXTRA_DELAY, 1);
-                intent.putExtra(CaptureActivity.EXTRA_ALLOW_PRINT, true);
+                intent.putExtra(CaptureActivity.EXTRA_ALLOW_PRINT, false);
                 startActivity(intent);
             }
         });
@@ -40,10 +40,10 @@ public class GuestbookInstructionsActivity extends Activity {
         fiveSecondsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GuestbookInstructionsActivity.this, CaptureActivity.class);
+                Intent intent = new Intent(PhotoboothInstructionsActivity.this, CaptureActivity.class);
                 //intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 intent.putExtra(CaptureActivity.EXTRA_DELAY, 5);
-                intent.putExtra(CaptureActivity.EXTRA_ALLOW_PRINT, true);
+                intent.putExtra(CaptureActivity.EXTRA_ALLOW_PRINT, false);
                 startActivity(intent);
             }
         });
@@ -53,9 +53,9 @@ public class GuestbookInstructionsActivity extends Activity {
         tenSecondsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GuestbookInstructionsActivity.this, CaptureActivity.class);
+                Intent intent = new Intent(PhotoboothInstructionsActivity.this, CaptureActivity.class);
                 intent.putExtra(CaptureActivity.EXTRA_DELAY, 10);
-                intent.putExtra(CaptureActivity.EXTRA_ALLOW_PRINT, true);
+                intent.putExtra(CaptureActivity.EXTRA_ALLOW_PRINT, false);
                 //intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
             }
@@ -66,7 +66,7 @@ public class GuestbookInstructionsActivity extends Activity {
         abandonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GuestbookInstructionsActivity.this, MainChooseActivity.class);
+                Intent intent = new Intent(PhotoboothInstructionsActivity.this, MainChooseActivity.class);
                 startActivity(intent);
             }
         });
