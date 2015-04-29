@@ -42,7 +42,7 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:background="@color/buttonBackground"
-                 android:text="Réessayer" />
+                 android:text="Recommencer" />
 
             <Button android:id="@+id/printButton" style="?metaButtonBarButtonStyle"
                 android:layout_width="400dp" android:layout_height="wrap_content"

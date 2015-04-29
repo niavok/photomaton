@@ -31,7 +31,7 @@
             >
 
 
-            <TextView  android:text="Rebranchez la tablette dès que vous avez fini de l'utiliser. Merci" android:layout_width="match_parent"
+            <TextView  android:text="Veillez à bien rebranchez la tablette après son utilisation. Merci." android:layout_width="match_parent"
                 android:id="@+id/plugTabletTextView"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|center_horizontal"
@@ -72,7 +72,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="40dp"/>
 
-            <TextView android:text="Prendre une photo et l'imprimer pour le livre d'or." android:layout_width="match_parent"
+            <TextView android:text="Pour rendre une photo, l'imprimer puis placer la dans le livre d'or." android:layout_width="match_parent"
                 android:id="@+id/guestbookTextView"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|center_horizontal"
@@ -112,7 +112,7 @@
                 android:background="@color/buttonBackground"
                 />
 
-            <TextView android:text="Prendre des photos souvenirs qui vous seront envoyées après le mariage." android:layout_width="match_parent"
+            <TextView android:text="Prendre des photos souvenirs seul ou accompagné, muni ou non d'accessoires." android:layout_width="match_parent"
                 android:id="@+id/photoBoothTextView"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|center_horizontal"

@@ -83,7 +83,7 @@ public class MainChooseActivity extends Activity {
 
         if(getIntent().getBooleanExtra(EXTRA_PRINTING, false)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Impression lancée\nEn cas de problème n'hésitez pas à aller chercher Frédéric Bertolus")
+            builder.setMessage("Impression lancée\nEn cas de problème n'hésitez pas à prévenir Frédéric Bertolus")
                     .setCancelable(false)
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {

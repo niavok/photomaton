@@ -29,19 +29,24 @@
                 android:textSize="40dp"
                 android:layout_margin="20dp"
                 android:id="@+id/guestbookInstructionsTextView1" />
-            <TextView android:text="2 - Placez vous dans le cône tracé au sol pour être dans le cadre."
+            <TextView android:text="2 - Placez vous dans le cône tracé au sol (pour être dans le cadre)."
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="40dp"
                 android:layout_margin="20dp"
                 android:id="@+id/guestbookInstructionsTextView2" />
-            <TextView android:text="3 - Choisissez le bouton du délai de votre choix pour prendre une photo. Vous pourrez la visualiser et faire d'autres essais avant d'imprimer."
+            <TextView android:text="3 - Choisissez le temps que vous aurez avant d'être pris en photo."
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="40dp"
                 android:layout_margin="20dp"
                 android:id="@+id/guestbookInstructionsTextView3" />
-
+            <TextView android:text="4 - Prenez une pose décalée. Faîtes ressortir votre âme d'acteur. Vous laisserez un beau souvenir aux mariés."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="40dp"
+                android:layout_margin="20dp"
+                android:id="@+id/guestbookInstructionsTextView4" />
 
             <Button
                 android:layout_width="wrap_content"
